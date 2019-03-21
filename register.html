@@ -1,15 +1,87 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="description" content="注册-趣考网络——程序员养成系统">
-		<title>注册-趣考网络——程序员养成系统</title>
-		<link rel="stylesheet" href="static/css/main.css" type="text/css" charset="UTF-8">
-		<script src="static/js/main.js" charset="UTF-8"></script>
-		<script src="https://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
-	</head>
-	<body>
-		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="注册-趣考网络——程序员养成系统">
+    <title>注册-趣考网络——程序员养成系统</title>
+    <link rel="stylesheet" href="static/css/register.css" type="text/css" charset="UTF-8">
+    <script src="static/js/register.js" charset="UTF-8"></script>
+    <!--jQuery及其插件引用-->
+    <script src="static/tools/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="static/tools/jquery.cookie.js" type="text/javascript"></script>
+    <!--bootstrap引用-->
+    <script src="static/tools/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link href="static/tools/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="navigation">
+    <div class="navigation-font">趣考网络</div>
+</div>
+
+<div class="main-part">
+    <div class="container box">
+        <div class="text-info" id="welcomeText">欢迎来到趣考网络，这里有着开放的学习交流环境，支持每一个有梦想的人成功成才~
+            欢迎加入我们~</div>
+        <hr class="hr">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form input-register">
+                    <form method="post" action="#"
+                          accept-charset="UTF-8">
+                        <input id="telephone_register" class="form-control" type="text"
+                               placeholder="手机号码（仅支持中国大陆）" name="phone">
+                        <input id="password_register" class="form-control" type="password"
+                               placeholder="密码" name="password">
+                        <input id="password_confirmation" class="form-control" type="password"
+                               placeholder="再次确认密码">
+                        <div class="input-group input-valid-group">
+                            <input id="validNum" type="text" class="form-control input-valid" placeholder="验证码">
+                            <span class=" input-group-addon btn btn-default" style="margin-right: 0">发送验证码</span>
+                        </div>
+                        <input id="name" class="form-control" type="text"
+                               placeholder="姓名">
+                        <input id="stdNum" class="form-control" type="text"
+                               placeholder="学号">
+                        <input id="major" class="form-control" type="text"
+                               placeholder="专业">
+                        <label for="gender">
+                            <select id="gender" class="form-control form-inline">
+                                <option value="" style="display: none;" disabled selected>性别</option>
+                                <option>男</option>
+                                <option>女</option>
+                            </select>
+                        </label>
+                        <label for="college">
+                            <select id="college" class="form-control form-inline">
+                                <option value="" style="display: none;" disabled selected>学校</option>
+                                <option>福州大学</option>
+                                <option>其他学校</option>
+                            </select>
+                        </label>
+                        <label for="interest">
+                            <select id="interest" class="form-control form-inline">
+                                <option value="" style="display: none;" disabled selected>兴趣方向</option>
+                                <option>Android</option>
+                                <option>前端</option>
+                                <option>微信小程序</option>
+                                <option>IOS</option>
+                                <option>java后端</option>
+                            </select>
+                        </label>
+                        <textarea id="known" class="form-control input-block" rows="4"
+                                   placeholder="对开源的理解"></textarea>
+                        <textarea id="dream" class="form-control input-block" type="text"
+                                  placeholder="你的梦想"></textarea>
+                        <input class="btn btn-info center-block btn-lg" type="submit" value="注册"
+                               name="commit" style="display: block">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+</body>
 </html>
