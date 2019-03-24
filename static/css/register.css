@@ -18,14 +18,14 @@ html body{
     top: 0;
     padding: 80px;
     width: 100%;
-    height: 1300px;
+    height: 1500px;
     background-color: rgba(246, 242, 247, 1);
 }
 
 .box{
     padding: 100px;
     width: 70%;
-    height: 1000px;
+    height: 1200px;
     line-height: 20px;
     background-color: rgba(254, 254, 254, 1);
     text-align: center;

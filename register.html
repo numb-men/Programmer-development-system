@@ -30,8 +30,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form input-register">
-                    <form method="post"
-                          accept-charset="UTF-8">
                         <input id="telephone" class="form-control" type="text"
                                placeholder="手机号码（仅支持中国大陆）" name="phone">
                         <input id="password_register" class="form-control" type="password"
@@ -49,25 +47,28 @@
                                placeholder="学号">
                         <input id="major" class="form-control" type="text"
                                placeholder="专业">
-                        <input id="birthday" class="form-control" type="month"
+                        <input id="email" class="form-control" type="email"
+                           placeholder="邮箱">
+                        <input id="birthday" class="form-control" type="date"
                                placeholder="出生年月">
+
                         <label for="gender">
                             <select id="gender" class="form-control form-inline">
-                                <option value="" style="display: none;" disabled selected>性别</option>
+                                <option value="未知" style="display: none;" disabled selected>性别</option>
                                 <option>男</option>
                                 <option>女</option>
                             </select>
                         </label>
                         <label for="college">
                             <select id="college" class="form-control form-inline">
-                                <option value="" style="display: none;" disabled selected>学校</option>
+                                <option value="未知" style="display: none;" disabled selected>学校</option>
                                 <option>福州大学</option>
                                 <option>其他学校</option>
                             </select>
                         </label>
                         <label for="interest">
                             <select id="interest" class="form-control form-inline">
-                                <option value="" style="display: none;" disabled selected>兴趣方向</option>
+                                <option value="未知" style="display: none;" disabled selected>兴趣方向</option>
                                 <option>Android</option>
                                 <option>前端</option>
                                 <option>微信小程序</option>
@@ -79,14 +80,15 @@
                                   placeholder="对开源的理解"></textarea>
                         <textarea id="dream" class="form-control input-block"
                                   placeholder="你的梦想"></textarea>
-                        <input id="register" class="btn btn-info center-block btn-lg" type="submit" value="注册"
-                               name="" style="display: block" onclick="register_send()">
-                    </form>
+                        <div id="register" class="btn btn-info btn-lg"
+                                onclick="register_send()">出发
+                        </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- 手机号码正确，提示短信已发送模态框（Modal） -->
 <div class="modal fade" id="phoneRightModal" tabindex="-1" role="dialog" aria-labelledby="phoneRightModalLabel" aria-hidden="true">
