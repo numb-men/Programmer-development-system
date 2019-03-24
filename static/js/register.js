@@ -137,9 +137,14 @@ function ajax_info() {
 
     $.ajax(settings).done(function (response) {
         console.log("注册接口：" + response);
-        for (let i in response.data) {
-            if (response.data.hasOwnProperty(i))
-                console.log(i);
+        if(response.code === 200){
+            alert("注册成功");
+            for (let i in response.data) {
+                if (response.data.hasOwnProperty(i))
+                    console.log(i);
+            }
+        }else {
+            alert(response.msg)
         }
     });
 }
