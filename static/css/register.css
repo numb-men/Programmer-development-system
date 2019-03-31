@@ -1,6 +1,7 @@
-html body{
+html,body{
     margin:0;
     padding:0;
+    font-size: 100%;
 }
 
 .navigation{
@@ -9,9 +10,10 @@ html body{
 }
 
 #welcomeText{
-    font-size: 40px;
+    text-align: left;
+    font-size: 2em;
     letter-spacing: 5px;
-    line-height: 40px;
+    line-height: 1.4em;
 }
 .main-part{
     left: 0;
@@ -34,10 +36,10 @@ html body{
 
 .navigation-font{
     font-family: 'fzhanzhenguangbiaos-gbregular';
-    color: white;
-    padding-top: 20px;
-    padding-left: 40px;
-    font-size: 100px;
+    color: #fefefe;
+    padding-top: 40px;
+    padding-left: 80px;
+    font-size: 6em;
 }
 .input-register{
     padding-left: 10%;

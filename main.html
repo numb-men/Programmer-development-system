@@ -9,37 +9,113 @@
     <script src="https://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span2">
+    <div class="navigation">
+        <div class="navigation-font">趣考网络</div>
+    </div>
+    <div class="content">
+        <div class="top-bar">
+            <div class="label">程序猿养成系统</div>
+            <select name="category" class="category">
+                <option value="py">Python</option>
+                <option value="android">安卓</option>
+                <option value="jee">Java 后端</option>
+                <option value="html">前端</option>
+                <option value="wechat">微信小程序</option>
+            </select>
+            <div class="user">
+                <img src="static/img/test.jpg" class="headimg">
+                <div class="nickname">衡与墨</div>
+            </div>
         </div>
-        <div class="span6">
-            <form class="form-horizontal">
-                <div class="control-group">
-                    <label class="control-label" for="inputEmail">邮箱</label>
-                    <div class="controls">
-                        <input id="inputEmail" type="text"/>
+        <div class="center">
+            <div class="left-bar">
+                <div class="left-bar-label">任务列表</div>
+                <div class="tasks">
+                    <div class="task">
+                        <div class="descript">第一次任务</div>
+                        <img src="static/img/complete.png" class="task-icon">
+                    </div>
+                    <div class="task-complete">
+                        <div class="descript">第二次任务</div>
+                        <img src="static/img/time.png" class="task-icon">
+                    </div>
+                    <div class="task">
+                        <div class="descript">第三次任务</div>
+                        <img src="static/img/lock.png" class="task-icon">
+                    </div>
+                    <div class="task">
+                        <div class="descript">第四次任务</div>
+                        <img src="static/img/lock.png" class="task-icon">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="inputPassword">密码</label>
-                    <div class="controls">
-                        <input id="inputPassword" type="password"/>
-                    </div>
+            </div>
+            <div class="right-content">
+                <div class="task-title">
+                    Python 基础考核
                 </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <label class="checkbox"><input type="checkbox"/> Remember me</label>
-                        <button type="submit" class="btn">登陆</button>
-                    </div>
+                <p>
+                    <b class="author">衡与墨</b>
+                    <b class="update-time">衡与墨 更新于 2019-9-10</b>
+                </p>
+                <div class="dv-line"></div>
+                <div class="task-content">
+
+<h4 id="-">目标：</h4>
+<ul>
+<li>1、熟练python基础语法、面向对象的基本思想</li>
+<li>2、养成良好代码风格</li>
+<li>3、能熟练在github上进行代码管理</li>
+</ul>
+<hr>
+<h3 id="-">任务一</h3>
+<p>在平时的日常生活中，我们通常把团队成员的信息记录在纸上，这很不方便，作为计算机专业的学子，我们应该用我们掌握的知识，更加轻松的实现团队成员管理。那么，请你通过Python实现一个简单的团队成员管理系统客户端，它需要以下几个功能：</p>
+<h4 id="-">基本功能</h4>
+<ul>
+<li>1、通过命令行来进行实现，运行程序需要提示当前时间，显示基础菜单（菜单包含以下功能）</li>
+<li>2、可以读取命令行输入新建成员，成员的属性有（姓名，学号，性别，生日，手机号，qq号，年级，专业，掌握的技术栈，兴趣爱好，加入团队的时间，当前的状态（在校、读研、工作）等，可以自己补充更多属性，但要满足列出的属性）</li>
+<li>3、可以查询所有成员的信息；可以通过学号/姓名查询某个成员的具体信息；可以通过年级/加入团队的时间/当前的状态/掌握的技术栈/专业/来进行筛选查看信息；查看多人信息时需要分页（每页10条人员信息）；</li>
+<li>4、可以通过学号/姓名来删除某个成员，在删除前提示是否确认</li>
+<li>5、可以通过学号/姓名来修改某个成员的信息</li>
+<li>6、在任何时候都可以输入exit + 回车 退出程序，并提示谢谢使用</li>
+<li>7、将趣考网络团队的成员信息收集并录入，并充分的测试程序</li>
+<li>8、使用github托管代码，并在每次写完阶段性的代码之后push代码</li>
+</ul>
+<p><strong>备注</strong>：注意输入的正确性检验（边界、名称长度、日期等），不正确的输入不允许读入，使用统一的编码规范（参考pep8），必须要有合适的注释，虽然用命令行，但是也要尽量做的美观，数据呈现时要排列整齐</p>
+<h4 id="-">进阶功能</h4>
+<ul>
+<li>1、使用sqlite进行数据存储</li>
+<li>2、增加将所有成员信息导出成.xls表格的功能</li>
+<li>3、使用pyqt实现界面</li>
+</ul>
+<hr>
+<h3 id="-">任务二</h3>
+<p>在很多博客网站，我们都使用markdown来进行博客内容的编辑，但是在博客上展示时，我们希望它能呈现目录，并且图片都能规整化，请通过一段脚本，实现文章的规整化：</p>
+<h4 id="-">基本功能</h4>
+<ul>
+<li>1、通过####号的多少来区分层级，h1（#）为文章标题，h2（##）为子标题，h3（###）为子子标题...以此类推，给定一个file.md文件生成对应的file_catalogue.md目录文件（要求用markdown的列表语法列出目录）</li>
+<li>2、在markdown中图片是用<code>![描述文字](链接)</code>的形式来添加的，但是有的博客不支持使用Markdown来制定图片的大小，给定一个file.md文件，请将其中的图片都规整化后生成file_orderliness.md文件</li>
+<li>3、将以上两个功能生成的markdown文件合并成一个file_complete.md文件，然后使用markdown、pdfkit库，转成file_complete.html文件和file_complete.pdf文件</li>
+<li>4、使用github托管代码，并在每次写完阶段性的代码之后push代码</li>
+</ul>
+<p><strong>备注</strong>：使用正则表达式来进行匹配和替换，file指的是文件名，使用统一的编码规范（参考pep8），必须要有合适的注释</p>
+<h4 id="-">进阶功能</h4>
+<ul>
+<li>类似任务一建立文章管理系统（增删改查规整化五大功能）（sqlite存储数据、使用pyqt实现界面）</li>
+</ul>
+<hr>
+<h3 id="-">参考资源</h3>
+<p>Python基础教程、Python官方文档、流畅的Python、菜鸟教程（Python）</p>
+<h3 id="-">建议</h3>
+<p>善于使用搜索引擎解决问题，在开始编码前先理清需求，进行简单的设计，养成良好的编程风格，有不懂的立即询问，不要让问题遗留</p>
+
                 </div>
-            </form>
+                <div class="submit-task">提交任务</div>
+            </div>
         </div>
-        <div class="span4">
+        <div class="copyright">
+            CopyRight @ finalexam.cn 2019
         </div>
     </div>
-</div>
-<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </body>
 </html>

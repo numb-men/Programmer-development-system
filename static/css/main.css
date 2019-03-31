@@ -1,0 +1,210 @@
+html, body {
+  font-family: 'SourceHanSansCN-Normal';
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  background: #F6F2F7;
+}
+.navigation{
+  background: #3193DC;
+  height:180px;
+}
+.navigation-font{
+  font-family: 'fzhanzhenguangbiaos-gbregular';
+  color: #fefefe;
+  padding-top: 40px;
+  padding-left: 80px;
+  font-size: 6em;
+}
+.content {
+  width: 1400px;
+  margin: 0 auto;
+  background: #F6F2F7;
+}
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 10px;
+  margin-top: 40px;
+  background: #fefefe;
+  /*border: 1px solid #000;*/
+}
+.label {
+  font-family: 'fzhanzhenguangbiaos-gbregular';
+  color: #343131;
+  font-size: 2em;
+  line-height: 50px;
+  margin-left: 40px;
+}
+.category {
+  padding: 0 8px;
+  margin: 5px 0;
+  margin-right: 450px;
+  border-radius: 4px;
+  height: 40px;
+  color: #389AE3;
+}
+.user {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 20px;
+  /*border: 1px solid #000;*/
+}
+.headimg {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 50%;
+}
+.nickname {
+  font-size: 1.1em;
+  line-height: 50px;
+  padding-left: 10px;
+  color: #666666;
+}
+.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.left-bar {
+  width: 280px;
+  min-height: 900px;
+  margin: 10px;
+  padding: 20px;
+  margin-right: 0;
+  background: #fefefe;
+  display: flex;
+  flex-direction: column;
+  /*border: 1px solid #000;*/
+}
+.left-bar-label {
+  font-size: 1.8em;
+  color: #666666;
+  text-align: center;
+  width: 100%;
+  padding: 40px 0;
+  padding-top: 25px;
+  border-bottom: 1.5px solid #F6F2F7;
+}
+.tasks {
+  margin: 10px 0;
+  padding-top: 5px;
+  /*border: 1px solid #000;*/
+}
+.task {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 160px;
+  padding: 10px 35px;
+  color: #a9a9a9;
+  margin: 30px auto;
+  border-radius: 4px;
+  box-shadow: 1px 1px 8px #d9d9d9;
+  /*border: 1px solid #000;*/
+}
+.task-complete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 160px;
+  background: #F6F2F7;
+  padding: 10px 35px;
+  color: #666;
+  margin: 30px auto;
+  border-radius: 4px;
+  box-shadow: 1px 1px 8px #d9d9d9;
+}
+.descript {
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: 26px;
+  /*border: 1px solid #000;*/
+}
+.task-icon {
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+  /*border-radius: 50%;*/
+  /*border: 1px solid #000;*/
+}
+.right-content {
+  width: 800px;
+  min-height: 900px;
+  margin: 10px;
+  padding: 50px 120px;
+  background: #fefefe;
+  /*border: 1px solid #000;*/
+}
+.task-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #000;
+  width: 100%;
+  text-align: center;
+  line-height: 150%;
+  margin-bottom: 5px;
+}
+.author {
+  margin-left: 540px;
+  font-size: 0.9em;
+  font-weight: normal;
+  color: #666;
+}
+.update-time {
+  font-weight: normal;
+  font-size: 0.9em;
+  font-weight: normal;
+  color: #666;
+}
+.task-content {
+  /*border: 1px solid #000;*/
+  margin-bottom: 45px;
+}
+.dv-line {
+  width: 100%;
+  height: 1px;
+  background: #666;
+  margin: 25px 0 35px 0;
+}
+.submit-task {
+  width: 250px;
+  color: #fefefe;
+  background: #46b8da;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+  line-height: 45px;
+  margin: 0 auto;
+  border-radius: 4px;
+  box-shadow: 1px 1px 8px #d9d9d9;
+  border: 1px solid #46b8da;
+}
+.copyright {
+  text-align: center;
+  width: 1340px;
+  margin: 10px;
+  font-size: 1.2em;
+  line-height: 40px;
+  padding: 10px 20px;
+  margin-top: 0;
+  background: #fefefe;
+  color: #343131;
+  /*border: 1px solid #000;*/
+}
+@font-face {
+  font-family: 'fzhanzhenguangbiaos-gbregular';
+  src: url('../fonts/fzhanzhenguangbiaos-gbregular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SourceHanSansCN-Normal';
+  src: url('../fonts/SourceHanSansCN-Normal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

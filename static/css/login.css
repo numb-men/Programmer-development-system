@@ -1,26 +1,26 @@
 html, body {
   font-family: 'SourceHanSansCN-Normal';
-  width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
   font-size: 100%;
+  background: #389AE3;
+  text-align: center;
 }
 .content {
-  background: #389AE3;
-  width: 100%;
-  height: 100%;
+  width: 1250px;
+  height: 800px;
+  margin:0 auto;
 }
 .center {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  position: absolute;
+  position: relative;
   top: 180px;
   left: 0;
-  width: 60%;
-  margin: 0 20%;
-  height: 500px;
+  min-width: 1200px;
+  margin:20px auto;
+  min-height: 500px;
 }
 .label {
   font-family: 'fzhanzhenguangbiaos-gbregular';
@@ -84,6 +84,7 @@ html, body {
   font-size: 0.75em;
   color: #666;
   margin-left: 130px;
+  text-align: left;
 }
 .login-box-bottom a{
   color: #1E6DEE;
@@ -105,6 +106,8 @@ html, body {
   position: absolute;
   bottom: 130px;
   width: 100%;
+  min-width: 1200px;
+  margin:20px auto;
   text-align: center;
   font-size: 1.7em;
 }
