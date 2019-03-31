@@ -10,9 +10,9 @@ function isPoneAvailable($phoneInput) {
         console.log(false);
         return false;
     } else {
-        $("#send").attr("data-target", "#phoneRightModal");
-        console.log("手机格式：" + true);
-        ajax_sms();
+        // $("#send").attr("data-target", "#phoneRightModal");
+        // console.log("手机格式：" + true);
+        sendSms();
         return true;
     }
 }
@@ -33,118 +33,91 @@ function isPasswordAvailable() {
 }
 
 
-function register_send() {
-
+function bindRegister() {
     if (isPasswordAvailable()) {
-        if ($("#name").val() !== "") {
-            if ($("#stdNum") !== "") {
-                if ($("#email") !== "") {
-                    if ($("#gender") !== "") {
-                        if ($("#college") !== "") {
-                            if ($("#interest") !== "") {
-                                ajax_info();
-                            } else {
-                                alert("请选择你的兴趣方向");
-                            }
-                        } else {
-                            alert("请选择你的学校");
-                        }
-                    } else {
-                        alert("请选择你的性别");
-                    }
-                } else {
-                    alert("邮箱不能为空");
-                }
-            } else {
-                alert("学号不能为空");
-            }
-        } else {
+        if ($("#name").val() == "") {
             alert("姓名不能为空")
+        }
+        else if ($("#stdNum") == "") {
+            alert("学号不能为空")
+        }
+        else if ($("#email") == "") {
+            alert("邮箱不能为空")
+        }
+        else if ($("#gender") == "") {
+            alert("请选择你的性别")
+        }
+        else if ($("#college") == "") {
+            alert("请选择你的学校")
+        }
+        else if ($("#interest") == "") {
+            alert("请选择你的兴趣方向")
+        }
+        else{
+            sendInfo()
         }
     }
 }
 
-function ajax_sms() {
-    let form = new FormData();
-    form.append("phone", $("#telephone").val().toString().trim());
+function sendSms() {
+    let formData = new FormData();
+    formData.append("phone", $("#telephone").val().toString().trim());
 
-    console.log("正在向后端发送请求");
-    let settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://www.finalexam.cn/tasksystem/user/sms/register",
-        "method": "POST",
-        "xhrFields": {
-            "withCredentials": true
-        },
-        "headers": {
-            "cache-control": "no-cache",
-        },
-        "processData": false,
-        "contentType": false,
-        "mimeType": "multipart/form-data",
-        "data": form
-    };
-
-    $.ajax(settings).done(function (response) {
-        console.log("短信验证接口：" + response);
-    });
+    post("http://www.finalexam.cn/tasksystem/user/sms/register", formData, "测试手机验证码",
+        function(){
+            alert("短信已发送！请在手机上查看！")
+        }
+    )
 }
 
-function ajax_info() {
-    let form = new FormData();
-    form.append("phone", $("#telephone").val().toString().trim());
-    form.append("stuid", $("#stdNum").val().toString().trim());
-    form.append("name", $("#name").val().toString().trim());
-    form.append("password", $("#password_register").val());
-    form.append("sex", $("#gender").val().toString().trim());
-    form.append("birthdate", $("#birthday").val().toString().trim());
-    form.append("professional", $("#major").val().toString().trim());
-    form.append("understand", $("#known").val().toString().trim());
-    form.append("dream", $("#dream").val().toString().trim());
-    form.append("direction", $("#interest").val().toString().trim());
-    form.append("code", $("#validNum").val().toString().trim());
-    form.append("email", $("#email").val().toString().trim());
+function sendInfo() {
+    let formData = new FormData();
+    formData.append("phone", $("#telephone").val().toString().trim());
+    formData.append("stuid", $("#stdNum").val().toString().trim());
+    formData.append("name", $("#name").val().toString().trim());
+    formData.append("password", $("#password_register").val());
+    formData.append("sex", $("#gender").val().toString().trim());
+    formData.append("birthdate", $("#birthday").val().toString().trim());
+    formData.append("professional", $("#major").val().toString().trim());
+    formData.append("understand", $("#known").val().toString().trim());
+    formData.append("dream", $("#dream").val().toString().trim());
+    formData.append("direction", $("#interest").val().toString().trim());
+    formData.append("code", $("#validNum").val().toString().trim());
+    formData.append("email", $("#email").val().toString().trim());
 
-    // console.log($("#telephone").val().toString().trim());
-    // console.log($("#stdNum").val().toString().trim());
-    // console.log($("#name").val().toString().trim());
-    // console.log($("#password_register").val().toString().trim());
-    // console.log($("#gender").val().toString().trim());
-    // console.log($("#birthday").val().toString().trim());
-    // console.log($("#major").val().toString().trim());
-    // console.log($("#known").val().toString().trim());
-    // console.log($("#dream").val().toString().trim());
-    // console.log($("#validNum").val().toString().trim());
-    // console.log($("#email").val().toString().trim());
-
-    let settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://www.finalexam.cn/tasksystem/user/register",
-        "method": "POST",
-        "xhrFields": {
-            "withCredentials": true
-        },
-        "headers": {
-            "cache-control": "no-cache",
-        },
-        "processData": false,
-        "contentType": false,
-        "mimeType": "multipart/form-data",
-        "data": form
-    };
-
-    $.ajax(settings).done(function (response) {
-        console.log("注册接口：" + response);
-        if(response.code === 200){
-            alert("注册成功");
-            for (let i in response.data) {
-                if (response.data.hasOwnProperty(i))
-                    console.log(i);
-            }
-        }else {
-            alert(response.msg)
+     post("http://www.finalexam.cn/tasksystem/user/register", formData, "测试注册",
+        function(){
+            alert("注册成功！")
+            $(window).attr('location','login.html')
         }
-    });
+    )
+}
+
+function post(url, formData, desc, callback){
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: formData,
+        cahce: false,
+        async: true,
+        processData: false,
+        contentType: false,
+        mimeType: "multipart/formData-data",
+        success: function(res, textStatus, jqXHR){
+            console.log(desc + res)
+            res = JSON.parse(res)
+            console.log(res.code, res.data)
+            if(res.code == 200){
+                callback()
+            }else {
+                alert(res.msg)
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            reqFail()
+        }
+    })
+}
+function reqFail(){
+    alert("连接服务器失败！")
 }

@@ -6,7 +6,7 @@ function bindLogin(){
     var formData = new FormData()
     formData.append("phone", $("#phonenum").val().toString().trim())
     formData.append("password", $("#password").val())
-    post_ajax("http://www.finalexam.cn/tasksystem/user/login", formData, "测试登录",
+    post("http://www.finalexam.cn/tasksystem/user/login", formData, "测试登录",
         function(){
             alert("登录成功！")
             $(window).attr('location','main.html')
@@ -30,7 +30,7 @@ function checkFormData(){
     }
     return result
 }
-function post_ajax(url, formData, desc, callback){
+function post(url, formData, desc, callback){
     $.ajax({
         type: "POST",
         url: url,
