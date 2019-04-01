@@ -16,7 +16,19 @@ function isPoneAvailable($phoneInput) {
         return true;
     }
 }
-
+//
+//
+//
+//
+//
+//  TODO: 修改注册验证码未填写BUG
+//
+//
+//
+//
+//
+//
+//
 
 function isPasswordAvailable() {
     const password = $("#password_register").val();
@@ -85,7 +97,7 @@ function sendInfo() {
     formData.append("code", $("#validNum").val().toString().trim());
     formData.append("email", $("#email").val().toString().trim());
 
-     post("http://www.finalexam.cn/tasksystem/user/register", formData, "测试注册",
+    post("http://www.finalexam.cn/tasksystem/user/register", formData, "测试注册",
         function(){
             alert("注册成功！")
             $(window).attr('location', 'login.html')

@@ -8,18 +8,16 @@ html, body {
 }
 .content {
   width: 1250px;
-  height: 800px;
+  height: 900px;
   margin:0 auto;
 }
 .center {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  position: relative;
-  top: 180px;
-  left: 0;
   min-width: 1200px;
   margin:20px auto;
+  margin-top: 180px;
   min-height: 500px;
 }
 .label {
@@ -105,11 +103,10 @@ html, body {
 }
 .copyright {
   color: #fefefe;
-  position: absolute;
-  bottom: 130px;
+  margin:20px auto;
+  margin-top: 120px;
   width: 100%;
   min-width: 1200px;
-  margin:20px auto;
   text-align: center;
   font-size: 1.7em;
 }
