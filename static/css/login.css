@@ -28,6 +28,8 @@ html, body {
   padding: 0 30px;
   line-height: 480px;
   margin-bottom: 20px;
+  text-decoration: none;
+  display: block;
   color: #fefefe;
 }
 .login-box {

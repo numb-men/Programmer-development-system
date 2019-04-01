@@ -88,7 +88,7 @@ function sendInfo() {
      post("http://www.finalexam.cn/tasksystem/user/register", formData, "测试注册",
         function(){
             alert("注册成功！")
-            $(window).attr('location','login.html')
+            $(window).attr('location', 'login.html')
         }
     )
 }

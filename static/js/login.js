@@ -9,7 +9,12 @@ function bindLogin(){
     post("http://www.finalexam.cn/tasksystem/user/login", formData, "测试登录",
         function(){
             alert("登录成功！")
-            $(window).attr('location','main.html')
+            console.log(document.cookie)
+            // //保存cookie
+            // let exp = new Date();
+            // exp.setTime(exp.getTime() + 1000 * 60 * 60 * 24); //这里表示保存24小时
+            // document.cookie = "music_identify=" + id + ";expires=" + exp.toGMTString();
+            $(window).attr('location', 'main.html')
         }
     )
 }
@@ -39,6 +44,8 @@ function post(url, formData, desc, callback){
         async: true,
         processData: false,
         contentType: false,
+        xhrFields: { withCredentials: true },
+        crossDomain: true,
         mimeType: "multipart/form-data",
         success: function(res, textStatus, jqXHR){
             console.log(desc + res)
