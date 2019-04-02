@@ -2,20 +2,26 @@ var dirs = null //培养方向
 var tasks = null //任务列表
 var tasksSle = null //对应培养方案的任务列表的当前选择列表
 var dirSle = 1  //当前选择的培养方向
-const defaultDir = 1 //初始加载时选择的培养方向
+var userDir = null //用户注册时选择的培养方向
+var defaultDir = 1 //初始加载时选择的培养方向
 const defaultSle = 0 //初始选择为0，即第一个任务
-const statusDict = { "-1": "lock", "0": "time", "1": "complete"}
+const statusDict = { "3": "lock", "2": "time", "1": "complete"}
 
 $(document).ready(function(){
     init()
 })
 function init(){
-    loadUserInfo()
-    loadDirs()
-    bindSleDir()
-    bindTaskList()
-    bindSubmitTask()
-    bindSubmitOk()
+    post("http://www.finalexam.cn/tasksystem/user/get/info", null, "测试获取用户信息",
+        function(res){
+            userDir = res.data["direction"]
+            $(".nickname").append(res.data["name"])
+            loadDirs()
+            bindSleDir()
+            bindTaskList()
+            bindSubmitTask()
+            bindSubmitOk()
+        }
+    )
 }
 function bindSubmitOk(){
     $(".submit-ok").click(function(){
@@ -52,20 +58,6 @@ function bindSubmitTask(){
         $(".submit-task-box").toggleClass("show unshow")
     })
 }
-function loadUserInfo(){
-    post("http://www.finalexam.cn/tasksystem/user/get/info", null, "测试获取用户信息",
-        function(res){
-            //
-            //
-            // TODO:由用户的方向设置初始的Dir
-            //
-            //
-            //
-            //
-            $(".nickname").append(res.data["name"])
-        }
-    )
-}
 function bindSleDir(){
     $(".category").change(function(){
         console.log($(this).val())
@@ -79,7 +71,7 @@ function bindTaskList(){
 function bindTask(){
     let taskSle = parseInt($(this).attr("id").split('-')[1])
     console.log('click task', taskSle)
-    if (tasks[dirSle][taskSle]["status"] >= 0){
+    if (tasks[dirSle][taskSle]["state"] < 3){
         $(".task-sle").click(bindTask)
         $(".task-sle").toggleClass("task-sle task")
         $(this).toggleClass("task task-sle")
@@ -92,11 +84,18 @@ function loadDirs(){
     post("http://www.finalexam.cn/tasksystem/dir/get", null, "测试获取培养方向",
         function(res){
             dirs = res.data
+
             for (let i in dirs){
                 dir = dirs[i]
                 let option = '<option value="dir-' + dir["id"] + '">' + dir["name"] + '</option>'
                 // console.log(dir, option)
                 $(".category").append(option)
+                // 由用户的方向设置初始的Dir
+                console.log(userDir, dir["describe"])
+                if (dir["name"] == userDir){
+                    defaultDir = dir["id"]
+                    $(".category").val("dir-" + dir["id"])
+                }
             }
             tasks = new Array(dirs.length)
             tasksSle = new Array(dirs.length)
@@ -109,20 +108,12 @@ function loadDirs(){
 }
 function loadTasks(dirId){
     if (!tasks[dirId]){
-        post("http://www.finalexam.cn/tasksystem/task/get/" + dirId, null, "测试获取对应培养方向的任务列表",
+        post("http://www.finalexam.cn/tasksystem/sub/progress/" + dirId, null, "测试获取对应培养方向的完成进度",
             function(res){
-                //
-                //
-                //TODO: 按任务level排序tasks
-                //      存取stasus
-                //
-                //
                 tasks[dirId] = res.data
                 for (let i in tasks[dirId]){
-                    tasks[dirId][i]["status"] = -1 // 默认任务为未完成
                     tasks[dirId][i]["content"] = null // 设置内容为空
                 }
-                // loadProgress(defaultDir)
                 renderTasks(dirId)
             }
         )
@@ -136,13 +127,9 @@ function renderTasks(dirId){
     // console.log(tasksSle)
     let tasksList = tasks[dirId]
     let taskSle = tasksSle[dirId]
-    // ********** 测试使用，模拟已完成和待完成的情况
-    tasksList[0]["status"] = 1
-    tasksList[1]["status"] = 0
-    // **********
     for (let i in tasksList){
         task = tasksList[i]
-        let icon = statusDict[task["status"].toString()]
+        let icon = statusDict[task["state"].toString()]
         task = '<div class="' + (taskSle == i ? "task-sle":"task") + '"\
                      id="task-'+ i +'">\
                     <div class="task-name">' + task["title"] + '</div>\
@@ -155,9 +142,10 @@ function renderTasks(dirId){
     loadTaskContent(dirId, taskSle)
 }
 function loadTaskContent(dirId, taskSle){
+    if (tasks[dirId].length == 0){ return }
     if (tasks[dirId][taskSle]["content"] == null){
         taskid = tasks[dirId][taskSle]["id"]
-        console.log(taskid)
+        console.log('taskid', taskid, "http://www.finalexam.cn/tasksystem/task/get/detial/" + taskid)
         post("http://www.finalexam.cn/tasksystem/task/get/detial/" + taskid, null, "测试获取任务详情",
             function(res){
                 tasks[dirId][taskSle]["contact"] = res.data["contact"]
@@ -188,13 +176,6 @@ function renderTaskContent(task){
     $(".right-content").append(taskContent)
     bindSubmitTask()
 }
-function loadProgress(dirId){
-    post("http://www.finalexam.cn/tasksystem/sub/progress/" + dirId, null, "测试获取对应培养方向的完成进度",
-        function(res){
-            progressList[dirId] = res.data
-        }
-    )
-}
 function checkUrl(url){
     var regexp = /((http|https):\/\/([\w\-]+\.)+[\w\-]+(\/[\w\u4e00-\u9fa5\-\.\/?\@\%\!\&=\+\~\:\#\;\,]*)?)/
     var url = url.match(regexp);
@@ -216,15 +197,15 @@ function post(url, formData, desc, callback){
         crossDomain: true,
         mimeType: "multipart/form-data",
         success: function(res, textStatus, jqXHR){
-            console.log(desc + res)
+            // console.log(desc + res)
             res = JSON.parse(res)
             console.log(desc, res.code, res.data)
             if(res.code == 200){
                 callback(res)
             }
-            else if (res.code == 202){
+            else if (res.code == 202 && desc == "测试获取用户信息"){
                 alert(res.msg)
-                // $(window).attr('location','login.html')
+                $(window).attr('location','login.html')
             }
             else{
                 alert(res.msg)

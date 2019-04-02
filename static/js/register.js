@@ -96,7 +96,15 @@ function sendInfo() {
     formData.append("direction", $("#interest").val().toString().trim());
     formData.append("code", $("#validNum").val().toString().trim());
     formData.append("email", $("#email").val().toString().trim());
-
+    //
+    //
+    //
+    //
+    //TODO: 使用sha1加密密码
+    //
+    //
+    //
+    //
     post("http://www.finalexam.cn/tasksystem/user/register", formData, "测试注册",
         function(){
             alert("注册成功！")

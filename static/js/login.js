@@ -6,6 +6,12 @@ function bindLogin(){
     var formData = new FormData()
     formData.append("phone", $("#phonenum").val().toString().trim())
     formData.append("password", $("#password").val())
+    //
+    //
+    //TODO: 使用sha1加密密码
+    //
+    //
+    // console.log(hex_sha1($("#password").val()))
     post("http://www.finalexam.cn/tasksystem/user/login", formData, "测试登录",
         function(){
             alert("登录成功！")
