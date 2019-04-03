@@ -53,7 +53,7 @@ function post(url, formData, desc, callback){
         success: function(res, textStatus, jqXHR){
             // console.log(desc + res)
             res = JSON.parse(res)
-            console.log(res.code, res.data)
+            // console.log(res.code, res.data)
             if(res.code == 200){
                 callback()
             }else {

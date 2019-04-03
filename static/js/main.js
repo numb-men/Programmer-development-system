@@ -61,7 +61,7 @@ function bindSubmitTask(){
     $(".submit-task").click(function(){
         taski = $(".task-sle").attr("id").split('-')[1]
         taskid = tasks[dirSle][taski]["id"]
-        console.log(taskid)
+        // console.log(taskid)
         post("http://www.finalexam.cn/tasksystem/sub/get/commit/" + taskid, null, "测试查询提交历史",
             function(res){
                 if (res.data != null){
@@ -213,7 +213,7 @@ function post(url, formData, desc, callback){
         success: function(res, textStatus, jqXHR){
             // console.log(desc + res)
             res = JSON.parse(res)
-            console.log(desc, res.code, res.data)
+            // console.log(desc, res.code, res.data)
             if(res.code == 200){
                 callback(res)
             }
