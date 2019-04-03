@@ -5,7 +5,7 @@ var dirSle = 1  //当前选择的培养方向
 var userDir = null //用户注册时选择的培养方向
 var defaultDir = 1 //初始加载时选择的培养方向
 const defaultSle = 0 //初始选择为0，即第一个任务
-const statusDict = { "3": "lock", "2": "time", "1": "complete"}
+const statusDict = { "3": "lock", "2": "time", "1": "complete", "0": "audit"}
 
 $(document).ready(function(){
     init()
@@ -20,6 +20,7 @@ function init(){
             bindTaskList()
             bindSubmitTask()
             bindSubmitOk()
+            bindIknow()
         }
     )
 }
@@ -38,19 +39,22 @@ function bindSubmitOk(){
             formData.append("taskid", taskid.toString())
             formData.append("blog", $("#blogUrl").val().toString().trim())
             formData.append("github", $("#githubUrl").val().toString().trim())
-            console.log(formData, dirSle, taskid,
-                        $("#blogUrl").val(), $("#githubUrl").val())
-            console.log(formData.get("dirid"), formData.get("taskid"), formData.get("blog"), formData.get("github"))
+            // console.log(formData.get("dirid"), formData.get("taskid")
+            //     , formData.get("blog"), formData.get("github"))
             post("http://www.finalexam.cn/tasksystem/sub/commit", formData, "测试提交任务",
                 function(res){
                     if (res.code == 200){
                         $(".submit-task-box").toggleClass("show unshow")
-                        alert("真棒啊，看来你已经完成这次任务了呢！\r\n那么，请耐心等待管理员的审核，"
-                            + "审核结果会以邮件通知.\r\n审核通过后系统会自动开启下一个任务.\r\n加油喔~ ( ˘ ³˘)♥")
+                        $(".submit-ok-box").toggleClass("show unshow")
                     }
                 }
             )
         }
+    })
+}
+function bindIknow(){
+    $(".i-know").click(function(){
+        $(".submit-ok-box").toggleClass("show unshow")
     })
 }
 function bindSubmitTask(){
@@ -70,7 +74,7 @@ function bindTaskList(){
 }
 function bindTask(){
     let taskSle = parseInt($(this).attr("id").split('-')[1])
-    console.log('click task', taskSle)
+    // console.log('click task', taskSle)
     if (tasks[dirSle][taskSle]["state"] < 3){
         $(".task-sle").click(bindTask)
         $(".task-sle").toggleClass("task-sle task")
@@ -91,15 +95,14 @@ function loadDirs(){
                 // console.log(dir, option)
                 $(".category").append(option)
                 // 由用户的方向设置初始的Dir
-                console.log(userDir, dir["describe"])
                 if (dir["name"] == userDir){
                     defaultDir = dir["id"]
                     $(".category").val("dir-" + dir["id"])
                 }
             }
-            tasks = new Array(dirs.length)
-            tasksSle = new Array(dirs.length)
-            for (let i = 0; i < dirs.length; i++){
+            tasks = new Array(dirs.length + 1)
+            tasksSle = new Array(dirs.length + 1)
+            for (let i = 0; i < dirs.length + 1; i++){
                 tasksSle[i] = defaultSle
             }
             loadTasks(defaultDir)
@@ -129,6 +132,7 @@ function renderTasks(dirId){
     let taskSle = tasksSle[dirId]
     for (let i in tasksList){
         task = tasksList[i]
+        console.log(task["state"])
         let icon = statusDict[task["state"].toString()]
         task = '<div class="' + (taskSle == i ? "task-sle":"task") + '"\
                      id="task-'+ i +'">\
@@ -145,7 +149,6 @@ function loadTaskContent(dirId, taskSle){
     if (tasks[dirId].length == 0){ return }
     if (tasks[dirId][taskSle]["content"] == null){
         taskid = tasks[dirId][taskSle]["id"]
-        console.log('taskid', taskid, "http://www.finalexam.cn/tasksystem/task/get/detial/" + taskid)
         post("http://www.finalexam.cn/tasksystem/task/get/detial/" + taskid, null, "测试获取任务详情",
             function(res){
                 tasks[dirId][taskSle]["contact"] = res.data["contact"]

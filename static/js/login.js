@@ -5,13 +5,13 @@ function bindLogin(){
     if (checkFormData() == false){ return }
     var formData = new FormData()
     formData.append("phone", $("#phonenum").val().toString().trim())
-    formData.append("password", $("#password").val())
+    formData.append("password", hex_sha1($("#password").val()))
     //
     //
     //TODO: 使用sha1加密密码
     //
     //
-    // console.log(hex_sha1($("#password").val()))
+    console.log(hex_sha1($("#password").val()))
     post("http://www.finalexam.cn/tasksystem/user/login", formData, "测试登录",
         function(){
             alert("登录成功！")
@@ -50,6 +50,8 @@ function post(url, formData, desc, callback){
         async: true,
         processData: false,
         contentType: false,
+        // dataType: 'jsonp',
+        // crossDomain: true,
         xhrFields: { withCredentials: true },
         crossDomain: true,
         mimeType: "multipart/form-data",
@@ -67,6 +69,24 @@ function post(url, formData, desc, callback){
             reqFail()
         }
     })
+}
+function post_native(URL, params) {
+    //原生js实现post，虚拟表单
+    var temp = document.createElement('form')
+    temp.action = URL
+    temp.method = 'post'
+    temp.style.display = 'none'
+    for (var x in params) {
+        var opt = document.createElement('textarea')
+        opt.name = x
+        opt.value = params[x]
+        //alert(opt.value)
+        //alert(opt.name)
+        temp.appendChild(opt)
+    }
+    document.body.appendChild(temp)
+    temp.submit()
+    return temp
 }
 function reqFail(){
     alert("连接服务器失败！")
