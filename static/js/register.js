@@ -24,10 +24,9 @@ function isPoneAvailable($phoneInput) {
     const regular = /^[1][3,4578][0-9]{9}$/;
     if (!regular.test($phoneInput.val())) {
         $("#send").attr("data-target", "#phoneErrorModal");
-        console.log(false);
+        // console.log(false);
         return false;
     } else {
-        $("#send").attr("data-target", "#phoneRightModal");
         // console.log("手机格式：" + true);
         sendSms();
         return true;
@@ -84,7 +83,9 @@ function sendSms() {
 
     post("http://www.finalexam.cn/tasksystem/user/sms/register", formData, "测试手机验证码",
         function(){
-            // alert("短信已发送！请在手机上查看！")
+            alert("短信已发送！请在手机上查看！")
+            console.log("短信发送成功")
+            // $("#send").attr("data-target", "#phoneRightModal");
         }
     )
 }
@@ -128,7 +129,7 @@ function post(url, formData, desc, callback){
         crossDomain: true,
         mimeType: "multipart/formData-data",
         success: function(res, textStatus, jqXHR){
-            console.log(desc + res)
+            // console.log(desc + res)
             res = JSON.parse(res)
             console.log(res.code, res.data)
             if(res.code == 200){

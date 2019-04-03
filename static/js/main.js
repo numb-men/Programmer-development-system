@@ -59,12 +59,23 @@ function bindIknow(){
 }
 function bindSubmitTask(){
     $(".submit-task").click(function(){
-        $(".submit-task-box").toggleClass("show unshow")
+        taski = $(".task-sle").attr("id").split('-')[1]
+        taskid = tasks[dirSle][taski]["id"]
+        console.log(taskid)
+        post("http://www.finalexam.cn/tasksystem/sub/get/commit/" + taskid, null, "测试查询提交历史",
+            function(res){
+                if (res.data != null){
+                    $("#blogUrl").val(res.data["blog"])
+                    $("#githubUrl").val(res.data["github"])
+                }
+                $(".submit-task-box").toggleClass("show unshow")
+            }
+        )
     })
 }
 function bindSleDir(){
     $(".category").change(function(){
-        console.log($(this).val())
+        // console.log($(this).val())
         dirSle = parseInt($(this).val().split('-')[1])
         loadTasks(dirSle)
     })
@@ -132,7 +143,7 @@ function renderTasks(dirId){
     let taskSle = tasksSle[dirId]
     for (let i in tasksList){
         task = tasksList[i]
-        console.log(task["state"])
+        // console.log(task["state"])
         let icon = statusDict[task["state"].toString()]
         task = '<div class="' + (taskSle == i ? "task-sle":"task") + '"\
                      id="task-'+ i +'">\
@@ -154,7 +165,7 @@ function loadTaskContent(dirId, taskSle){
                 tasks[dirId][taskSle]["contact"] = res.data["contact"]
                 tasks[dirId][taskSle]["author"] = res.data["author"]
                 tasks[dirId][taskSle]["content"] = res.data["content"]
-                console.log(tasks[dirId][taskSle])
+                // console.log(tasks[dirId][taskSle])
                 renderTaskContent(tasks[dirId][taskSle])
             }
         )
