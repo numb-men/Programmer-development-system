@@ -43,6 +43,15 @@ html,body{
     text-decoration: none;
     display: block;
 }
+.navigation-font:hover{
+  font-family: 'fzhanzhenguangbiaos-gbregular';
+  color: #fefefe;
+  padding-top: 40px;
+  padding-left: 80px;
+  font-size: 6em;
+  text-decoration: none;
+  display: block;
+}
 .input-register{
     padding-left: 10%;
     padding-right: 10%;
